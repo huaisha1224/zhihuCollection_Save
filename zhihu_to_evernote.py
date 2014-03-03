@@ -35,10 +35,12 @@ import sys
 import requests
 import configparser
 import smtplib
+import login
 from bs4 import BeautifulSoup
 from email.mime.text import MIMEText
 from email.header import Header
 from email.mime.multipart import MIMEMultipart
+
 
 
 
@@ -73,29 +75,42 @@ def Next_page(url):
 
 
 #=============================================================================
-def Collect_url(url):
+def Collect_url(url,option="collect"):
     """
-    接收用户输入的知乎收藏页面地址、
-    然后提取知乎收藏页面的URL地址
-    @url_list_regex         :提取URL规则、我们真正需要的是第二个()里面的内容
+    接收用户输入的知乎收藏页面地址、和分页地址
+    然后提取知乎收藏页面所有的单个收藏的URL地址
+    @url_list_collect       :提取收藏的URL规则、我们真正需要的是第二个()里面的内容
+    @url_list_follow        :提取关注的URL规则、我们真正需要的是第二个()里面的内容
     @single_url_list        :用于存放从单个收藏页面提取出来的URL地址列表
 
     """      
 
-    url_list_regex = r"(<h2 class.*href=\")(/\w+/\d+)(\">)(.*)(</a></h2>)"
+    url_list_collect = r"(<h2 class.*href=\")(/\w+/\d+)(\">)(.*)(</a></h2>)"
+    url_list_follow = r"(<a class.*href=\")(/\w+/\d+)(\">)(.*)(</a>)"
+
     global single_url_list
     single_url_list = []
     list_temp = []
-    r = requests.get(url)
-    if r.status_code == 200:
-        r_txt = r.text
-        #如果正则表达式匹配成功则说明里面有单个收藏链接、添加到列表中
-        if re.search(url_list_regex,r_txt).group() != None:
-            list_temp = re.findall(url_list_regex,r_txt)
-        else:
-            pass
+
+    #login.zhihu_session
+    if option == "collect": #判断用户输入的是收藏地址还是关注地址
+        r = requests.get(url)
+        if r.status_code == 200:
+            r_txt = r.text
+            #如果正则表达式匹配成功则说明里面有单个收藏链接、添加到列表中
+            if re.search(url_list_collect,r_txt).group() != None:
+                list_temp = re.findall(url_list_collect,r_txt)
+
+    elif option == "follow":
+        r = login.zhihu_session.get(url)
+        if r.status_code == 200:
+            r_txt = r.text
+            if re.search(url_list_follow,r_txt).group() != None:
+                list_temp = re.findall(url_list_follow,r_txt)
+    else:
+        pass
     
-    #用for循环吧列表里面的内容通过切片的时候提取出我们需要的，
+    #用for循环吧列表里面的内容通过切片的方式提取出我们需要的，
     #并赋值给single_url_list
     for i in list_temp:
         single_url_list.append("http://www.zhihu.com"+i[1])
@@ -117,8 +132,9 @@ def Email_zhihu_content(url):
     #提取问题的标题，并将其作为邮件的主题
     r = requests.get(url)
     if r.status_code == 200:
-        html_txt = r.text
-        soup = BeautifulSoup(html_txt)
+        html_text = r.text
+        #soup.prettify()
+        soup = BeautifulSoup(html_text)
         title_name = soup.title.string
         print (title_name)
 
@@ -127,7 +143,7 @@ def Email_zhihu_content(url):
         #设置邮件主题
         msg = MIMEMultipart("alternative")
         msg["Subject"] = Header(title_name + notebook,"utf-8")
-        part = MIMEText(html_txt,"html") #设置以html格式发送内容
+        part = MIMEText(html_text,"html") #设置以html格式发送内容
         msg.attach(part)
         
         #发送邮件
@@ -151,13 +167,28 @@ if __name__ == "__main__":
     mail_password = cf.get("info","mail_password")
     evernote_mail = cf.get("info","evernote_mail")
     notebook = "@" + cf.get("info","notebook")
+    zhihu_email = cf.get("info", "zhihu_email")
+    zhihu_password = cf.get("info", "zhihu_password")
 
-    Next_page(url)
+    #判断是否填写知乎账号
+    if zhihu_email != "no":
+        follow_url = "http://www.zhihu.com/question/following"
+        print ("Follow")
+        login.Login_Zhihu(zhihu_email,zhihu_password)
+        if login.zhihu_status == "Login Success": #判断是否登录成功
+            Collect_url(follow_url,"follow") 
+            for i in url_list:
+                print (i)
+                Email_zhihu_content(i)
+        else:
+            print (login.zhihu_status)
 
-    for i in page_url: #循环所有收藏文章分页列表
-        print (i)
-        Collect_url(i)
-    print (len(url_list))
-    for x in url_list: #循环所有的单页收藏文章url列表
-        print (x)
-        Email_zhihu_content(x)
+    else:
+        Next_page(url)
+        for i in page_url: #循环所有收藏文章分页列表
+            print (i)
+            Collect_url(i)
+        print (len(url_list))
+        for x in url_list: #循环所有的单页收藏文章url列表
+            print (x)
+            Email_zhihu_content(x)
