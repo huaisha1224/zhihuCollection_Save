@@ -2,6 +2,8 @@
 
 **将知乎收藏和"我关注的问题"自动发送到Evernote/印象笔记中**
 
+**Go语言版本请移步到[ZhihuToEvernote](https://github.com/huaisha1224/ZhihuToEvernote)**
+
 ###安装第三方库
 
 - 1、安装requests 2.1.0版本的第三方库
