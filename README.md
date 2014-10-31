@@ -2,9 +2,9 @@
 
 **将知乎收藏和"我关注的问题"自动发送到Evernote/印象笔记中**
 
-**Go语言版本请移步到[ZhihuToEvernote](https://github.com/huaisha1224/ZhihuToEvernote)**
+**Go语言版本请移步到[ZhihuToEvernote](https://github.com/huaisha1224/ZhihuToNote)**
 
-**EXE执行文件请移步到[ZhihuToEvernote](https://github.com/huaisha1224/ZhihuToEvernote)下载**
+**EXE执行文件请移步到[ZhihuToEvernote](https://github.com/huaisha1224/ZhihuToNote)下载**
 
 ###安装第三方库
 
