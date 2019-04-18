@@ -94,11 +94,11 @@ def start_zhihu_question():
             if not question_title:  # 如果获取标题失败、说明需要登录、登录一波
                 username = br.find_element_by_name('username')
                 username.click()
-                username.send_keys('sam.hxq@gmail.com') # 知乎帐号
+                username.send_keys('******') # 知乎帐号
 
                 password = br.find_element_by_name('password')
                 password.click()
-                password.send_keys('huaisha19851224')   # 知乎密码
+                password.send_keys('******')   # 知乎密码
 
                 loginButton = br.find_element_by_xpath(
                     '//*[@id="root"]/div/main/div/div/div/div[2]/div[1]/form/button')
@@ -122,8 +122,8 @@ def sendMail(question_name, question_content):
     Evernote的邮件地址中，Evernote会自动添加到笔记本中.
     """
     smtp = "smtp.126.com"   # 发送邮件的SMTP地址
-    send_mail = "huaisha1224@126.com"   # 发送邮件的帐号
-    send_mail_pwd = "1qaz2wsx"  #   发送邮件密码
+    send_mail = "******@126.com"   # 发送邮件的帐号
+    send_mail_pwd = "******"  #   发送邮件密码
     to_mail = 'me@OneNote.com'  # 接受邮件的帐号、按实际情况填写、OneNote不需要才
 
     msg = email.mime.multipart.MIMEMultipart()  # 创建消息对象
