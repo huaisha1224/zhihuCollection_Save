@@ -13,7 +13,7 @@
 - password=‘密码’
 - smtp = "smtp.126.com"   # 发送邮件的SMTP地址
 - send_mail = "huaisha1224@126.com"   # 发送邮件的帐号
-- send_mail_pwd = "1qaz2wsx"  #   发送邮件密码
+- send_mail_pwd = "*****"  #   发送邮件密码
 - to_mail = 'me@OneNote.com'  # 接受邮件的帐号、按实际情况填写、OneNote不需要才
 
 
