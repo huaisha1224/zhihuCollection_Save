@@ -1,55 +1,27 @@
-####zhihu_to_evernote
+**将知乎收藏和"我关注的问题"自动发送到Evernote/印象笔记/OneNote/有道云笔记中**
 
-**将知乎收藏和"我关注的问题"自动发送到Evernote/印象笔记中**
+### 用到的库和程序
+- Python_ver          = "Python3.6"
+- selenium_ver        = "selenium3.141.0"
+- Chrome_ver          = "Chrome73"
+- chromedriver_Ver    = "2019/03/07版本"
 
-**Go语言版本请移步到[ZhihuToEvernote](https://github.com/huaisha1224/ZhihuToNote)**
-
-**EXE执行文件请移步到[ZhihuToEvernote](https://github.com/huaisha1224/ZhihuToNote)下载**
-
-###安装第三方库
-
-- 1、安装requests 2.1.0版本的第三方库
-- 2、安装BeautifulSoup 4.2版本的第三方库
-
-###使用说明
-
-- 1、请使用国内邮箱、以保证能正常发送邮件到印象笔记中
-- 2、将login.py和zhihu_to_evernote.py文件下载到同一个目录下
-- 3、修改config.ini里面的内容为自己真实信息
-- 4、然后命令行下python zhihu_to_evernote.py即可
-
-		python zhihu_to_evernote.py
-
-###配置文件config.ini说明
-
-	[info]
-	url = http://www.zhihu.com/collection/20261977
-	mail_host = smtp.126.com
-	mail_user = huaisha******@126.com
-	mail_password = password
-	evernote_mail=huaisha*****@m.yinxiang.com
-	notebook = 知乎收藏文章
-	zhihu_email = no
-	zhihu_password = no
-
-**字段解释**
-
-	[info]
-	;知乎收藏页面的URL地址
-	url = http://www.zhihu.com/collection/20261977
-	;发送邮件的服务器
-	mail_host = smtp.126.com
-	;发送邮件的Email地址
-	mail_user = huaisha****@126.com
-	;登陆密码
-	mail_password = password
-	;接收邮件的Evernote地址
-	evernote_mail=huaisha***@m.yinxiang.com
-	;evernote上的一个笔记本、所有的收藏文章都会添加到这个笔记本下面，需要先有此笔记本
-	notebook = 知乎收藏文章
-	;下面2项为知乎账号密码/如果你需要吧"我关注的问题"也发送到Evernote那么填上账号密码,
-	如果是把知乎收藏发送到Evernote的话下面2项请填写no
-	zhihu_email = no
-	zhihu_password = no
+### 使用说明
+由于知乎的反爬虫机制、原来的requests模式已经不能抓取数据了、所以本次全部重新用selenium来抓取数据
+- url=‘知乎收藏地址’
+- username=‘之后帐号’
+- password=‘密码’
+- smtp = "smtp.126.com"   # 发送邮件的SMTP地址
+- send_mail = "huaisha1224@126.com"   # 发送邮件的帐号
+- send_mail_pwd = "*****"  #   发送邮件密码
+- to_mail = 'me@OneNote.com'  # 接受邮件的帐号、按实际情况填写、OneNote不需要才
 
 
+### 说明
+- 目前完成了知乎数据的采集功能、并经过测试可以发送到OneNote里面
+- 由于印象笔记免费版本的帐号不能接收邮件、所以暂时还没测试
+
+### 接下来的安排
+- 会支持印象笔记、Evernote、以及有道云笔记
+- 通过配置文件的方式、填入个性化数据
+- 打包成exe、方便使用

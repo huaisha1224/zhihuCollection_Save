@@ -105,11 +105,19 @@ def start_zhihu_question():
             if not question_title:  # 如果获取标题失败、说明需要登录、登录一波
                 username = br.find_element_by_name('username')
                 username.click()
+<<<<<<< HEAD
                 username.send_keys(username)  # 知乎帐号
 
                 password = br.find_element_by_name('password')
                 password.click()
                 password.send_keys(password)   # 知乎密码
+=======
+                username.send_keys('******') # 知乎帐号
+
+                password = br.find_element_by_name('password')
+                password.click()
+                password.send_keys('******')   # 知乎密码
+>>>>>>> origin/master
 
                 loginButton = br.find_element_by_xpath(
                     '//*[@id="root"]/div/main/div/div/div/div[2]/div[1]/form/button')
@@ -133,12 +141,19 @@ def sendMail(question_name, question_content):
     用webdriver下载页面内容、然后用smtplib发送html内容到
     Evernote的邮件地址中，Evernote会自动添加到笔记本中.
     """
+<<<<<<< HEAD
     config = ConfigParser()
     config.read('config.ini', encoding='UTF-8')
     smtp = config['email']['mail_host']  # 发送邮件的SMTP地址
     mail_user = config['email']['mail_user']  # 发送邮件的帐号
     mail_password = config['email']['mail_password']  # 发送邮件密码
     to_mail = config['evernote']['to_mail']    # 接受邮件的帐号
+=======
+    smtp = "smtp.126.com"   # 发送邮件的SMTP地址
+    send_mail = "******@126.com"   # 发送邮件的帐号
+    send_mail_pwd = "******"  #   发送邮件密码
+    to_mail = 'me@OneNote.com'  # 接受邮件的帐号、按实际情况填写、OneNote不需要才
+>>>>>>> origin/master
 
     msg = email.mime.multipart.MIMEMultipart()  # 创建消息对象
     msg['from'] = mail_user  # 指定发件人
