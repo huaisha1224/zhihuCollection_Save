@@ -17,10 +17,10 @@
 
 
 ### 配置文件说明
-    [zhihu] 
-    url = https://www.zhihu.com/collection/20261977   # 收藏地址
-    zhihu_user = sam.hxq@gmail.com  #知乎帐号
-    zhihu_password = xxxxxx     #知乎密码
+    [zhihu] # 知乎收藏地址和帐号信息
+    url = https://www.zhihu.com/collection/20261977
+    zhihu_user = sam.hxq@gmail.com
+    zhihu_password = xxxxxx
 
     [email] #用于登录并发送邮件
     mail_host = smtp.126.com
@@ -34,7 +34,7 @@
 ### 接下来的安排
 
 
-   ~~支持印象笔记、Evernote、以及有道云笔记
-   ~~通过配置文件的方式、填入个性化数据
+    ~~支持印象笔记、Evernote、以及有道云笔记
+    ~~通过配置文件的方式、填入个性化数据
 
 - 打包成exe、方便使用
