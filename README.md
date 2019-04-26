@@ -16,11 +16,23 @@
 
 
 
-### 说明
-- 目前完成了知乎数据的采集功能、并经过测试可以发送到OneNote里面
-- 由于印象笔记免费版本的帐号不能接收邮件、所以暂时还没测试
+### 配置文件说明
+    [zhihu] 
+    url = https://www.zhihu.com/collection/20261977   # 收藏地址
+    zhihu_user = sam.hxq@gmail.com  #知乎帐号
+    zhihu_password = xxxxxx     #知乎密码
+
+    [email] #用于登录并发送邮件
+    mail_host = smtp.126.com
+    mail_user = huaisha1224@126.com
+    mail_password = xxxxx
+
+    [evernote]  # 印象笔记/Evernote/OneNote/有道云笔记的接受地址
+    to_mail= huaisha1224@m.yinxiang.com 
+
 
 ### 接下来的安排
-- 会支持印象笔记、Evernote、以及有道云笔记
-- 通过配置文件的方式、填入个性化数据
+~~支持印象笔记、Evernote、以及有道云笔记
+~通过配置文件的方式、填入个性化数据
+
 - 打包成exe、方便使用
