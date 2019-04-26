@@ -3,6 +3,7 @@
 __author__ = "Sam.huang"
 
 from selenium import webdriver
+from configparser import ConfigParser
 import email.mime.multipart
 import email.mime.text
 import smtplib
@@ -34,7 +35,11 @@ def get_question_url():
     """
     获取知乎收藏里面的所有回答URL地址
     """
-    url = 'https://www.zhihu.com/collection/20261977'   # 知乎收藏地址
+    # 从配置文件读取知乎收藏地址
+    config = ConfigParser()
+    config.read('config.ini', encoding='UTF-8')
+    url = config['zhihu']['url']
+
     global question_list
     question_list = []
     br = webdriver.Chrome()
@@ -73,6 +78,12 @@ def start_zhihu_question():
     """
     获取回答页面的问题标题和问题内容
     """
+    # 从配置文件读取知乎帐号密码
+    config = ConfigParser()
+    config.read('config.ini', encoding='UTF-8')
+    username = config['zhihu']['zhihu_user']
+    password = config['zhihu']['zhihu_password']
+
     # 如果找不到知乎问题URL列表 就调用函数去获取列表
     if not os.path.exists('zhihuQuestionUrl.txt'):
         print('~~~~本地找不到知乎URL列表~~~~')
@@ -94,11 +105,11 @@ def start_zhihu_question():
             if not question_title:  # 如果获取标题失败、说明需要登录、登录一波
                 username = br.find_element_by_name('username')
                 username.click()
-                username.send_keys('sam.hxq@gmail.com') # 知乎帐号
+                username.send_keys(username)  # 知乎帐号
 
                 password = br.find_element_by_name('password')
                 password.click()
-                password.send_keys('huaisha19851224')   # 知乎密码
+                password.send_keys(password)   # 知乎密码
 
                 loginButton = br.find_element_by_xpath(
                     '//*[@id="root"]/div/main/div/div/div/div[2]/div[1]/form/button')
@@ -109,7 +120,8 @@ def start_zhihu_question():
 
             content = br.find_element_by_xpath("//*").get_attribute("outerHTML")    # 获取html格式的内容
             sendMail(question_name, content)    # 发送邮件
-            time.sleep(10)
+            time.sleep(5)
+            br.close()
         except Exception:
             pass
 
@@ -121,13 +133,15 @@ def sendMail(question_name, question_content):
     用webdriver下载页面内容、然后用smtplib发送html内容到
     Evernote的邮件地址中，Evernote会自动添加到笔记本中.
     """
-    smtp = "smtp.126.com"   # 发送邮件的SMTP地址
-    send_mail = "huaisha1224@126.com"   # 发送邮件的帐号
-    send_mail_pwd = "1qaz2wsx"  #   发送邮件密码
-    to_mail = 'me@OneNote.com'  # 接受邮件的帐号、按实际情况填写、OneNote不需要才
+    config = ConfigParser()
+    config.read('config.ini', encoding='UTF-8')
+    smtp = config['email']['mail_host']  # 发送邮件的SMTP地址
+    mail_user = config['email']['mail_user']  # 发送邮件的帐号
+    mail_password = config['email']['mail_password']  # 发送邮件密码
+    to_mail = config['evernote']['to_mail']    # 接受邮件的帐号
 
     msg = email.mime.multipart.MIMEMultipart()  # 创建消息对象
-    msg['from'] = send_mail  # 指定发件人
+    msg['from'] = mail_user  # 指定发件人
     msg['to'] = to_mail  # 指定收件人
     msg['subject'] = question_name  # 邮件主题
 
@@ -136,8 +150,8 @@ def sendMail(question_name, question_content):
     try:
         em = smtplib.SMTP_SSL()
         em.connect(smtp)
-        em.login(send_mail, send_mail_pwd)
-        em.sendmail(from_addr=send_mail, to_addrs=to_mail, msg=msg.as_string())
+        em.login(mail_user, mail_password)
+        em.sendmail(from_addr=mail_user, to_addrs=to_mail, msg=msg.as_string())
         em.quit()
         print('~~~~~邮件发送完成~~~~')
     except Exception:
