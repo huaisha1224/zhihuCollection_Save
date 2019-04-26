@@ -3,18 +3,14 @@
 ### 用到的库和程序
 - Python_ver          = "Python3.6"
 - selenium_ver        = "selenium3.141.0"
-- Chrome_ver          = "Chrome73"
-- chromedriver_Ver    = "2019/03/07版本"
+
 
 ### 使用说明
-由于知乎的反爬虫机制、原来的requests模式已经不能抓取数据了、所以本次全部重新用selenium来抓取数据
-- url=‘知乎收藏地址’
-- username=‘之后帐号’
-- password=‘密码’
-- smtp = "smtp.126.com"   # 发送邮件的SMTP地址
-- send_mail = "huaisha1224@126.com"   # 发送邮件的帐号
-- send_mail_pwd = "*****"  #   发送邮件密码
-- to_mail = 'me@OneNote.com'  # 接受邮件的帐号、按实际情况填写、OneNote不需要才
+由于知乎的反爬虫机制、原来的requests模式已经不能抓取数据了、所以本次全部重新用selenium来抓取数据;
+- 你需要安装chrome浏览器
+- 安装对应chrome版本对应的chromedriver.exe
+[chromedriver.exe驱动程序](https://npm.taobao.org/mirrors/chromedriver/)
+
 
 
 ### 说明
