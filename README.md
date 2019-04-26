@@ -7,9 +7,12 @@
 
 ### 使用说明
 由于知乎的反爬虫机制、原来的requests模式已经不能抓取数据了、所以本次全部重新用selenium来抓取数据;
-- 你需要安装chrome浏览器
-- 安装对应chrome版本对应的chromedriver.exe
-[chromedriver.exe驱动程序](https://npm.taobao.org/mirrors/chromedriver/)
+- 你需要安装Chrome浏览器
+- 安装对应Chrome版本对应的Chromedriver.exe
+- 当然你也可以用Firefox浏览器
+
+[Chromedriver.exe驱动程序](https://npm.taobao.org/mirrors/chromedriver/)
+
 
 
 
