@@ -30,7 +30,7 @@
     mail_user = huaisha1224@126.com
     mail_password = xxxxx
 
-    [evernote]  # 印象笔记/Evernote/OneNote/有道云笔记的接受地址
+    [evernote]  # 印象笔记/Evernote/OneNote/有道云笔记的接收邮件地址
     to_mail= huaisha1224@m.yinxiang.com 
 
 
