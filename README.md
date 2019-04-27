@@ -27,15 +27,13 @@
     mail_user = huaisha1224@126.com
     mail_password = xxxxx
 
-    [evernote]  # 印象笔记/Evernote/OneNote/有道云笔记的接受地址
+    [evernote]  # 印象笔记/Evernote/OneNote/有道云笔记的邮件接收地址
     to_mail= huaisha1224@m.yinxiang.com 
 
 
 ### 接下来的安排
 
-    2019-04-26 已完成
-    ~~支持印象笔记、Evernote
-    ~~通过配置文件的方式、填入个性化数据
-    
-- 支持有道云笔记
-- 打包成exe、方便使用
+- [x] 支持印象笔记、Evernote
+- [x] 通过配置文件的方式、填入个性化数据    
+- [] 支持有道云笔记
+- [] 打包成exe、方便使用
