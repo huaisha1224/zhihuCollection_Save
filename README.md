@@ -7,9 +7,12 @@
 
 ### 使用说明
 由于知乎的反爬虫机制、原来的requests模式已经不能抓取数据了、所以本次全部重新用selenium来抓取数据;
-- 你需要安装Chrome浏览器
-- 安装对应Chrome版本对应的Chromedriver.exe
+- 安装selenium `pip install selenium
+- 需要安装Chrome浏览器
+- 安装Chrome版本对应的Chromedriver.exe
 - 当然你也可以用Firefox浏览器
+- 修改config.ini配置文件
+- python zhihuCollection_Save.py
 
 [Chromedriver.exe驱动程序](https://npm.taobao.org/mirrors/chromedriver/)
 
@@ -27,7 +30,11 @@
     mail_user = huaisha1224@126.com
     mail_password = xxxxx
 
+<<<<<<< HEAD
     [evernote]  # 印象笔记/Evernote/OneNote/有道云笔记的邮件接收地址
+=======
+    [evernote]  # 印象笔记/Evernote/OneNote/有道云笔记的接收邮件地址
+>>>>>>> origin/master
     to_mail= huaisha1224@m.yinxiang.com 
 
 
