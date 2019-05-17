@@ -33,10 +33,7 @@
     [evernote]  # 印象笔记/Evernote/OneNote/有道云笔记的邮件接收地址
     to_mail= huaisha1224@m.yinxiang.com 
 
-PS:
-OneNote的接受邮件：me@onenote.com(需要在onenote后台添加发送邮件)
-有道云笔记：save@note.youdao.com(需要在有道云笔记后台添加发送邮件)
-印象笔记：huaisha1224@m.yinxiang.com(在印象笔记后台获取邮件地址)
+
 
 ### 接下来的安排
 
@@ -44,3 +41,9 @@ OneNote的接受邮件：me@onenote.com(需要在onenote后台添加发送邮件
 - [x] 通过配置文件的方式、填入个性化数据    
 - [] 支持有道云笔记
 - [] 打包成exe、方便使用
+
+
+### 给个笔记的接收邮箱
+- OneNote的接受邮件：me@onenote.com(需要在onenote后台添加发送邮件)
+- 有道云笔记：save@note.youdao.com(需要在有道云笔记后台添加发送邮件)
+- 印象笔记：huaisha1224@m.yinxiang.com(在印象笔记后台获取邮件地址)
